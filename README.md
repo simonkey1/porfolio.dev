@@ -1,9 +1,4 @@
-# 👨🏻‍💻 Porfolio para programadores y desarrolladores
+# 👨🏻‍💻 Porfolio 2025
 
-<div align="center">
-<a href="https://porfolio.dev/">
-<img src="./public/porfolio.webp">
-</a>
-<p></p>
-</div>
+
 
