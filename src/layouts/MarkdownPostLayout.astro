@@ -1,0 +1,21 @@
+---
+import TableOfContents from "../components/TableofContents.astro";
+const { frontmatter, headings } = Astro.props;
+---
+
+<main class="container mx-auto max-w-4xl px-6">
+  <h1 class="text-3xl font-bold mb-4">{frontmatter.title}</h1>
+  <p class="text-gray-500">
+    Publicado en {frontmatter.pubDate.toString().slice(0, 10)}
+  </p>
+
+  <div class="flex gap-8">
+    <!-- Índice de contenido -->
+    <TableOfContents headings={headings} />
+
+    <!-- Contenido del post -->
+    <article class="prose lg:prose-lg">
+      <slot />
+    </article>
+  </div>
+</main>

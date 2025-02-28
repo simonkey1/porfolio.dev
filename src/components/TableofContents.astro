@@ -1,0 +1,48 @@
+---
+import { useEffect } from "react";
+
+const { headings } = Astro.props;
+
+// Resaltar el título activo al hacer scroll
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        const link = document.querySelector(`a[href="#${id}"]`);
+        if (entry.isIntersecting) {
+          document
+            .querySelectorAll(".toc a")
+            .forEach((el) => el.classList.remove("text-blue-600", "font-bold"));
+          link?.classList.add("text-blue-600", "font-bold");
+        }
+      });
+    },
+    { rootMargin: "-50% 0px -50% 0px", threshold: 0.1 }
+  );
+
+  document
+    .querySelectorAll("h2, h3")
+    .forEach((section) => observer.observe(section));
+}, []);
+---
+
+<aside
+  class="toc fixed top-20 left-4 w-64 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md"
+>
+  <h3 class="font-semibold text-lg">Índice</h3>
+  <ul class="space-y-2">
+    {
+      headings.map((heading: { slug: any; text: unknown }) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            class="block text-gray-600 hover:text-blue-600"
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
